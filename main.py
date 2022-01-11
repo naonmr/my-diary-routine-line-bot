@@ -11,12 +11,16 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import os
+import requests
 
 app = Flask(__name__)
 
 #環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+
+YOUR_TIMETREE_TOEN  = os.environ["YOUR_TIMETREE_TOEN"]
+YOUR_ROOM_ID  = os.environ["YOUR_TIMETREE_ID"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
@@ -48,6 +52,44 @@ def handle_message(event):
                 event.reply_token,
                 [
                     TextSendMessage(text='お疲れ様です'+ chr(0x10002D)),
+                ]
+            )
+    if event.type == "message":
+        if event.message.text in "習慣登録":
+            timetree_url= "https://timetreeapis.com/calendars/{YOUR_ROOM_ID}/events"
+            headers = {
+                "Content_Type": "application/json",
+                "Accept": "application/vnd.timetree.v1+json",
+                "Authorization": "Bearer {YOUR}"
+            }
+
+            request_body = {
+	            "data": {
+                "attributes": {
+                "category": "schedule",
+                "title": "Event title",
+                "all_day": True,
+                "start_at": "2022-03-02T00:00:00.000Z",
+                "start_timezone": "UTC",
+                "end_at": "2022-03-02T00:00:00.000Z",
+                "end_timezone": "UTC"
+                },
+                "relationships": {
+                    "label": {
+                    "data": {
+                        "id": "7wCtUb9faQ2o,1",
+                        "type": "label"
+                    }
+                }
+			}
+}
+}
+            res = requests.get(timetree_url, headers=headers, data=request_body)
+            print(res.text)
+            line_bot_api.reply_message(
+                event.reply_token,
+                [
+                    TextSendMessage(text='res.text'+ chr(0x10002D)),
                 ]
             )
         
