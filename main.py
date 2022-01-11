@@ -55,10 +55,10 @@ def handle_message(event):
                     TextSendMessage(text='お疲れ様です'+ chr(0x10002D)),
                 ]
             )
+            
     if event.type == "message":
-        if event.message.text in "習慣登録":
+        if event.reply_token:
 
-            print("🥺🥺")
             dt_now = datetime.datetime.now()
             year = dt_now.year
             month = dt_now.month
@@ -83,7 +83,7 @@ def handle_message(event):
                 "data": {
                 "attributes": {
                     "category": "schedule",
-                    "title": "Lineから登録",
+                    "title": event.message.text,
                     "all_day": True,
                     "start_at": f"{year}-{month}-{day}T00:00:00.000Z",
                     "start_timezone": "UTC",
@@ -106,7 +106,7 @@ def handle_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                    TextSendMessage(text=res.text+ chr(0x10002D)),
+                    TextSendMessage(text=f"{event.message.text}をTimeTreeに登録しました！{chr(0x100089)}"),
                 ]
             )
 
