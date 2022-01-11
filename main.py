@@ -12,7 +12,7 @@ from linebot.models import (
 )
 import os
 import requests
-import json
+import datetime
 
 app = Flask(__name__)
 
@@ -89,7 +89,7 @@ def handle_message(event):
     
             res = requests.post(timetree_url, headers=headers, json=request_body)
             print("🥺🥺")
-            print(res.text)
+            print(datetime.date.today())
             print("🥺🥺")
 
             line_bot_api.reply_message(
