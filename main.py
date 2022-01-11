@@ -73,7 +73,7 @@ def handle_message(event):
                         "start_timezone": "UTC",
                         "end_at": "2022-03-01T00:00:00.000Z",
                         "end_timezone": "UTC"
-                        },
+                        }
                     },
                 "relationships": {
                     "label": {
