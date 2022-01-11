@@ -85,7 +85,7 @@ def handle_message(event):
                 }
 			}
     
-            res = requests.get(timetree_url, headers=headers, data=request_body)
+            res = requests.post(timetree_url, headers=headers, data=request_body)
             print(res.text)
             line_bot_api.reply_message(
                 event.reply_token,
