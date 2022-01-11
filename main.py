@@ -12,6 +12,7 @@ from linebot.models import (
 )
 import os
 import requests
+import json
 
 app = Flask(__name__)
 
@@ -58,10 +59,11 @@ def handle_message(event):
         if event.message.text in "習慣登録":
 
             timetree_url= f"https://timetreeapis.com/calendars/{YOUR_ROOM_ID}/events"
+
             headers = {
-                "Content_Type": "application/json",
+                'Authorization': f'Bearer {YOUR_TIMETREE_TOEN}',
                 "Accept": "application/vnd.timetree.v1+json",
-                "Authorization": f"Bearer, {YOUR_TIMETREE_TOEN}"
+                "Content-Type": "application/json"
             }
             request_body = {
                 "data": {
@@ -85,25 +87,17 @@ def handle_message(event):
                 }
             }
     
-            res = requests.post(timetree_url, headers=headers, json=request_body)
+            res = requests.post(timetree_url, headers=headers, json=json.dumps(request_body))
             print("🥺🥺")
-            print(res)
+            print(res.text)
             print("🥺🥺")
 
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                    TextSendMessage(text=res+ chr(0x10002D)),
+                    TextSendMessage(text=res.text+ chr(0x10002D)),
                 ]
             )
-
-            line_bot_api.reply_message(
-                event.reply_token,
-                [
-                    TextSendMessage(text='お疲れ様です'+ chr(0x10002D)),
-                ]
-            )
-            
 
 
     line_bot_api.reply_message(
