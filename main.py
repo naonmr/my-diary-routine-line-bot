@@ -43,13 +43,11 @@ def callback():
 def handle_message(event):
 
     if event.type == "message":
-        if (event.message.text == "帰るよー！") or (event.message.text == "帰るよ！") or (event.message.text == "帰る！") or (event.message.text == "帰るよ"):
+        if event.message.text in "帰るよー！" or (event.message.text == "帰るよ！") or (event.message.text == "帰る！") or (event.message.text == "帰るよ"):
             line_bot_api.reply_message(
                 event.reply_token,
                 [
                     TextSendMessage(text='お疲れ様です'+ chr(0x10002D)),
-                    TextSendMessage(text='位置情報を送ってもらうと近くの駅を教えますよ'+ chr(0x10008D)),
-                    TextSendMessage(text='line://nv/location'),
                 ]
             )
         
