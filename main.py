@@ -58,6 +58,20 @@ def handle_message(event):
     if event.type == "message":
         if event.message.text in "習慣登録":
 
+            print("🥺🥺")
+            dt_now = datetime.datetime.now()
+            year = dt_now.year
+            month = dt_now.month
+            day = dt_now.day
+
+            if month < 10:
+                month = f"0{month}"
+            if day < 10:
+                day = f"0{day}"
+
+            print(year, month, day, "⏰")
+
+
             timetree_url= f"https://timetreeapis.com/calendars/{YOUR_ROOM_ID}/events"
 
             headers = {
@@ -88,10 +102,7 @@ def handle_message(event):
             }
     
             res = requests.post(timetree_url, headers=headers, json=request_body)
-            print("🥺🥺")
-            dt_now = datetime.datetime.now()
-            print(dt_now.year, dt_now.month, dt_now.day)
-
+            
             line_bot_api.reply_message(
                 event.reply_token,
                 [
