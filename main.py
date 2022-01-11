@@ -61,7 +61,7 @@ def handle_message(event):
             headers = {
                 "Content_Type": "application/json",
                 "Accept": "application/vnd.timetree.v1+json",
-                "Authorization": "Bearer {YOUR}"
+                "Authorization": "Bearer {YOUR_TIMETREE_TOEN}"
             }
             request_body = {
 	            "data": {
@@ -90,7 +90,7 @@ def handle_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                    TextSendMessage(text='res.text'+ chr(0x10002D)),
+                    TextSendMessage(text=res.text+ chr(0x10002D)),
                 ]
             )
         
