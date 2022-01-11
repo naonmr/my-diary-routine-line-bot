@@ -89,7 +89,8 @@ def handle_message(event):
     
             res = requests.post(timetree_url, headers=headers, json=request_body)
             print("🥺🥺")
-            print(datetime.date.today())
+            date =datetime.date.today() 
+            print(date)
             print("🥺🥺")
 
             line_bot_api.reply_message(
