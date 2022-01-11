@@ -86,13 +86,25 @@ def handle_message(event):
             }
     
             res = requests.post(timetree_url, headers=headers, data=request_body)
+            print("🥺🥺")
             print(res.text)
+            print("🥺🥺")
+
             line_bot_api.reply_message(
                 event.reply_token,
                 [
                     TextSendMessage(text=res.text+ chr(0x10002D)),
                 ]
             )
+
+            line_bot_api.reply_message(
+                event.reply_token,
+                [
+                    TextSendMessage(text='お疲れ様です'+ chr(0x10002D)),
+                ]
+            )
+            
+
 
     line_bot_api.reply_message(
         event.reply_token,
