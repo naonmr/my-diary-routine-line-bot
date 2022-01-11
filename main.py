@@ -56,34 +56,35 @@ def handle_message(event):
             )
     if event.type == "message":
         if event.message.text in "習慣登録":
+
             timetree_url= "https://timetreeapis.com/calendars/{YOUR_ROOM_ID}/events"
             headers = {
                 "Content_Type": "application/json",
                 "Accept": "application/vnd.timetree.v1+json",
                 "Authorization": "Bearer {YOUR}"
             }
-
             request_body = {
 	            "data": {
-                "attributes": {
-                "category": "schedule",
-                "title": "Event title",
-                "all_day": True,
-                "start_at": "2022-03-02T00:00:00.000Z",
-                "start_timezone": "UTC",
-                "end_at": "2022-03-02T00:00:00.000Z",
-                "end_timezone": "UTC"
-                },
+                    "attributes": {
+                        "category": "schedule",
+                        "title": "LINEから予定登録",
+                        "all_day": True,
+                        "start_at": "2022-03-01T00:00:00.000Z",
+                        "start_timezone": "UTC",
+                        "end_at": "2022-03-01T00:00:00.000Z",
+                        "end_timezone": "UTC"
+                        },
+                    },
                 "relationships": {
                     "label": {
-                    "data": {
-                        "id": "7wCtUb9faQ2o,1",
-                        "type": "label"
+                        "data": {
+                            "id": "7wCtUb9faQ2o,1",
+                            "type": "label"
+                        }
                     }
                 }
 			}
-}
-}
+    
             res = requests.get(timetree_url, headers=headers, data=request_body)
             print(res.text)
             line_bot_api.reply_message(
