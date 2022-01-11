@@ -64,26 +64,26 @@ def handle_message(event):
                 "Authorization": "Bearer {YOUR_TIMETREE_TOEN}"
             }
             request_body = {
-	            "data": {
-                    "attributes": {
-                        "category": "schedule",
-                        "title": "LINEから予定登録",
-                        "all_day": True,
-                        "start_at": "2022-03-01T00:00:00.000Z",
-                        "start_timezone": "UTC",
-                        "end_at": "2022-03-01T00:00:00.000Z",
-                        "end_timezone": "UTC"
-                        }
-                    },
+                "data": {
+                "attributes": {
+                    "category": "schedule",
+                    "title": "Lineから登録",
+                    "all_day": True,
+                    "start_at": "2022-03-01T00:00:00.000Z",
+                    "start_timezone": "UTC",
+                    "end_at": "2022-03-01T00:00:00.000Z",
+                    "end_timezone": "UTC"
+                },
                 "relationships": {
                     "label": {
-                        "data": {
-                            "id": "7wCtUb9faQ2o,1",
-                            "type": "label"
-                        }
+                    "data": {
+                        "id": "{YOUR_ROOM_ID},1",
+                        "type": "label"
+                    }
                     }
                 }
-			}
+                }
+            }
     
             res = requests.post(timetree_url, headers=headers, data=request_body)
             print(res.text)
@@ -93,9 +93,6 @@ def handle_message(event):
                     TextSendMessage(text=res.text+ chr(0x10002D)),
                 ]
             )
-        
-
-
 
     line_bot_api.reply_message(
         event.reply_token,
