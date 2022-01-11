@@ -57,11 +57,11 @@ def handle_message(event):
     if event.type == "message":
         if event.message.text in "習慣登録":
 
-            timetree_url= "https://timetreeapis.com/calendars/" + YOUR_ROOM_ID + "/events"
+            timetree_url= f"https://timetreeapis.com/calendars/{YOUR_ROOM_ID}/events"
             headers = {
                 "Content_Type": "application/json",
                 "Accept": "application/vnd.timetree.v1+json",
-                "Authorization": "Bearer" + YOUR_TIMETREE_TOEN
+                "Authorization": f"Bearer, {YOUR_TIMETREE_TOEN}"
             }
             request_body = {
                 "data": {
@@ -77,7 +77,7 @@ def handle_message(event):
                 "relationships": {
                     "label": {
                     "data": {
-                        "id": YOUR_ROOM_ID + ",1",
+                        "id": f"{YOUR_ROOM_ID},1",
                         "type": "label"
                     }
                     }
