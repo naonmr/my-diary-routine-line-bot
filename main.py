@@ -85,7 +85,7 @@ def handle_message(event):
                 }
             }
     
-            res = requests.post(timetree_url, headers=headers, data=request_body)
+            res = requests.post(timetree_url, headers=headers, json=request_body)
             print("🥺🥺")
             print(res.text)
             print("🥺🥺")
