@@ -85,9 +85,9 @@ def handle_message(event):
                     "category": "schedule",
                     "title": "Lineから登録",
                     "all_day": True,
-                    "start_at": "2022-03-01T00:00:00.000Z",
+                    "start_at": f"{year}-{month}-{day}T00:00:00.000Z",
                     "start_timezone": "UTC",
-                    "end_at": "2022-03-01T00:00:00.000Z",
+                    "end_at": f"{year}-{month}-{day}T00:00:00.000Z",
                     "end_timezone": "UTC"
                 },
                 "relationships": {
