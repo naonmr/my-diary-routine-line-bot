@@ -53,6 +53,9 @@ def callback():
 
     return 'OK'
 
+line_bot_api.push_message(
+    YOUR_USERID,
+    TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -128,14 +131,14 @@ def handle_message(event):
         TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
 
 
-    schedule.every(1).minutes.do(
-        line_bot_api.push_message(
-        YOUR_USERID,
-        TextSendMessage(text='ぷっしゅめっせーじです。やあ!')))
+    # schedule.every(1).minutes.do(
+    #     line_bot_api.push_message(
+    #     YOUR_USERID,
+    #     TextSendMessage(text='ぷっしゅめっせーじです。やあ!')))
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(1)
 
 
 
