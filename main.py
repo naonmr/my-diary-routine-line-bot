@@ -14,6 +14,9 @@ import os
 import requests
 import datetime
 
+import schedule
+import time
+
 
 app = Flask(__name__)
 
@@ -120,9 +123,17 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=event.message.text))
 
-line_bot_api.push_message(
-    YOUR_USERID,
-    TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
+def send_message():
+    line_bot_api.push_message(
+        YOUR_USERID,
+        TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
+
+def reminder():
+    schedule.every(1).minutes.do(send_message)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 
 if __name__ == "__main__":
