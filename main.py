@@ -123,13 +123,15 @@ def handle_message(event):
 
 
 
-def send_message():
     line_bot_api.push_message(
         YOUR_USERID,
         TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
 
-def reminder():
-    schedule.every(1).minutes.do(send_message)
+
+    schedule.every(1).minutes.do(
+        line_bot_api.push_message(
+        YOUR_USERID,
+        TextSendMessage(text='ぷっしゅめっせーじです。やあ!')))
 
     while True:
         schedule.run_pending()
@@ -143,5 +145,4 @@ if __name__ == "__main__":
 #    app.run()
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-    reminder()
 
