@@ -14,17 +14,16 @@ import os
 import requests
 import datetime
 
-import logging
-import sys
 
 app = Flask(__name__)
 
-app.logger.addHandler(logging.StreamHandler(sys.stdout))
-app.logger.setLevel(logging.INFO)
+
 
 #環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+
+YOUR_USERID = os.environ["YOUR_USERID"]
 
 YOUR_TIMETREE_TOEN  = os.environ["YOUR_TIMETREE_TOEN"]
 YOUR_ROOM_ID  = os.environ["YOUR_ROOM_ID"]
@@ -121,6 +120,9 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=event.message.text))
 
+line_bot_api.push_message(
+    YOUR_USERID,
+    TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
 
 
 if __name__ == "__main__":
