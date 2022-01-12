@@ -53,6 +53,9 @@ def callback():
 
     return 'OK'
 
+line_bot_api.push_message(
+        YOUR_USERID,
+        TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
 
 
 @handler.add(MessageEvent, message=TextMessage)
