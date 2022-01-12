@@ -53,9 +53,9 @@ def callback():
 
     return 'OK'
 
-line_bot_api.push_message(
-        YOUR_USERID,
-        TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
+# line_bot_api.push_message(
+#         YOUR_USERID,
+#         TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
 
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -125,6 +125,16 @@ def handle_message(event):
             )
 
 
+# def job():
+#     line_bot_api.push_message(
+#         YOUR_USERID,
+#         TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
+
+# schedule.every(5).seconds.do(job)
+
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
 
 
 if __name__ == "__main__":
@@ -132,14 +142,4 @@ if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
 
-def job():
-    line_bot_api.push_message(
-        YOUR_USERID,
-        TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
-
-schedule.every(1).minutes.do(job)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
 
