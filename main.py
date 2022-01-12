@@ -14,7 +14,16 @@ import os
 import requests
 import datetime
 
+import schedule
+import time
+
+import logging
+import sys
+
 app = Flask(__name__)
+
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.INFO)
 
 #環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -114,6 +123,8 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
+
+line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
 
 
 if __name__ == "__main__":
