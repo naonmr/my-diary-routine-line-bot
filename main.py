@@ -15,11 +15,6 @@ import requests
 import datetime
 
 
-
-import schedule
-import time
-
-
 app = Flask(__name__)
 
 
@@ -53,9 +48,9 @@ def callback():
 
     return 'OK'
 
-# line_bot_api.push_message(
-#         YOUR_USERID,
-#         TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
+line_bot_api.push_message(
+        YOUR_USERID,
+        TextSendMessage(text='今日も一日お疲れ様！'))
 
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -124,17 +119,6 @@ def handle_message(event):
                 ]
             )
 
-
-# def job():
-#     line_bot_api.push_message(
-#         YOUR_USERID,
-#         TextSendMessage(text='ぷっしゅめっせーじです。やあ!'))
-
-# schedule.every(5).seconds.do(job)
-
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
 
 
 if __name__ == "__main__":
